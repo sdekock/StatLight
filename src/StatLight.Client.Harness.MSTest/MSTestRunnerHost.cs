@@ -138,14 +138,15 @@ namespace StatLight.Client.Harness.Hosts.MSTest
                 settings.TestPanelType = typeof(StatLightTestPage);
             }
 
-            settings.SortTestClasses = _clientTestRunConfiguration.SortTestClasses;
-            settings.SortTestMethods = _clientTestRunConfiguration.SortTestMethods;
             settings.StartRunImmediately = true;
             settings.ShowTagExpressionEditor = false;
             settings.TestService = null;
 #elif July2009 || October2009 || November2009
             var settings = UnitTestSystem.CreateDefaultSettings();
 #endif
+            settings.SortTestClasses = _clientTestRunConfiguration.SortTestClasses;
+            settings.SortTestMethods = _clientTestRunConfiguration.SortTestMethods;
+
             // Below is the custom stuff...
             settings.TagExpression = _clientTestRunConfiguration.TagFilter;
             settings.LogProviders.Add(new ServerHandlingLogProvider());
