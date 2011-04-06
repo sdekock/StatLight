@@ -137,7 +137,9 @@ namespace StatLight.Client.Harness.Hosts.MSTest
 
                 settings.TestPanelType = typeof(StatLightTestPage);
             }
-            
+
+            settings.SortTestClasses = _clientTestRunConfiguration.SortTestClasses;
+            settings.SortTestMethods = _clientTestRunConfiguration.SortTestMethods;
             settings.StartRunImmediately = true;
             settings.ShowTagExpressionEditor = false;
             settings.TestService = null;

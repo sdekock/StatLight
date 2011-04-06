@@ -74,7 +74,9 @@ namespace StatLight.IntegrationTests
                 false,
                 "", StatLight.Core.WebBrowser.WebBrowserType.SelfHosted,
                 forceBrowserStart:true,
-                showTestingBrowserHost:false);
+                showTestingBrowserHost:false,
+                sortTestClasses: false,
+                sortTestMethods: false);
 
             //bool showTestingBrowserHost = statLightConfiguration.Server.XapHostType == XapHostType.MSTestApril2010;
             _testLogger.Debug("Setting up xaphost {0}".FormatWith(statLightConfiguration.Server.XapHostType));

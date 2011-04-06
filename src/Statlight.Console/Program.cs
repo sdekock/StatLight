@@ -212,6 +212,8 @@ Try: (the following two steps that should allow StatLight to start a web server 
             string queryString = _options.QueryString;
             WebBrowserType webBrowserType = _options.WebBrowserType;
             bool forceBrowserStart = _options.ForceBrowserStart;
+            bool sortTestClasses = _options.SortTestClasses;
+            bool sortTestMethods = _options.SortTestMethods;
 
             IEnumerable<string> xapPaths = _options.XapPaths;
             IEnumerable<string> testDlls = _options.Dlls;
@@ -239,7 +241,9 @@ Try: (the following two steps that should allow StatLight to start a web server 
                         queryString,
                         webBrowserType,
                         forceBrowserStart,
-                        showTestingBrowserHost);
+                        showTestingBrowserHost,
+                        sortTestClasses,
+                        sortTestMethods);
 
                 var testReport = DoTheRun(runnerType, statLightConfiguration);
                 testReports.Add(testReport);
@@ -248,6 +252,7 @@ Try: (the following two steps that should allow StatLight to start a web server 
             foreach (var dllPath in testDlls)
             {
                 _logger.Debug("Starting configuration for: {0}".FormatWith(dllPath));
+
                 StatLightConfiguration statLightConfiguration = _statLightConfigurationFactory
                     .GetStatLightConfigurationForDll(
                         unitTestProviderType,
@@ -260,7 +265,7 @@ Try: (the following two steps that should allow StatLight to start a web server 
                         queryString,
                         webBrowserType,
                         forceBrowserStart,
-                        showTestingBrowserHost);
+                        showTestingBrowserHost, sortTestClasses, sortTestMethods);
 
                 var testReport = DoTheRun(runnerType, statLightConfiguration);
                 testReports.Add(testReport);

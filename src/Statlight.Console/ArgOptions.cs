@@ -66,6 +66,21 @@ namespace StatLight.Console
             get { return _dlls; }
         }
 
+        private bool _sortTestClasses = true;
+        private bool _sortTestMethods = true;
+
+        public bool SortTestClasses
+        {
+            get { return _sortTestClasses; }
+        }
+
+        public bool SortTestMethods
+        {
+            get {
+                return _sortTestMethods;
+            }
+        }
+
         private ArgOptions()
             : this(new string[] { })
         {
@@ -176,6 +191,8 @@ namespace StatLight.Console
                             throw new StatLightException("Could not parse parameter [{0}] for numberofbrowsers into an integer.".FormatWith(v));
                         }
                     })
+                .Add<string>("DoNotSortTestClasses", "Turns off the sorting of test classes.", v => _sortTestClasses = false)
+                .Add<string>("DoNotSortTestMethods", "Turns off the sorting of test methods.", v => _sortTestMethods = false)
                 .Add("QueryString", "Specify some QueryString that will be appended to the browser test page request. This can be helpful to setup a remote web service and pass in the url, or a port used. You can then access the querystring within silverlight HtmlPage.Document.QueryString[..]", v => QueryString = v ?? String.Empty)
                 .Add<string>("debug", "Prints a verbose spattering of internal logging information. Useful when trying to understand possible issues or when reporting issues back to StatLight.CodePlex.com", v => IsRequestingDebug = true)
                 .Add<string>("teamcity", "Changes the console output to generate the teamcity message spec.", v => OutputForTeamCity = true)

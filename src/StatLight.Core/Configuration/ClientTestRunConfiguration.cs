@@ -20,7 +20,7 @@ namespace StatLight.Core.Configuration
         private Collection<string> _methodsToTest;
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1054:UriParametersShouldNotBeStrings", MessageId = "4#", Justification = "System.Uri is not DataContract serializable")]
-        public ClientTestRunConfiguration(UnitTestProviderType unitTestProviderType, IEnumerable<string> methodsToTest, string tagFilters, int numberOfBrowserHosts, WebBrowserType webBrowserType, bool showTestingBrowserHost, string entryPointAssembly)
+        public ClientTestRunConfiguration(UnitTestProviderType unitTestProviderType, IEnumerable<string> methodsToTest, string tagFilters, int numberOfBrowserHosts, WebBrowserType webBrowserType, bool showTestingBrowserHost, string entryPointAssembly, bool sortTestClasses, bool sortTestMethods)
         {
             if (methodsToTest == null) throw new ArgumentNullException("methodsToTest");
             if (unitTestProviderType == UnitTestProviderType.Undefined)
@@ -36,6 +36,8 @@ namespace StatLight.Core.Configuration
             WebBrowserType = webBrowserType;
             ShowTestingBrowserHost = showTestingBrowserHost;
             EntryPointAssembly = entryPointAssembly;
+            SortTestClasses = sortTestClasses;
+            SortTestMethods = sortTestMethods;
         }
 
         [DataMember]
@@ -76,6 +78,12 @@ namespace StatLight.Core.Configuration
 
         [DataMember]
         public bool ShowTestingBrowserHost { get; set; }
+
+        [DataMember]
+        public bool SortTestClasses { get; set; }
+
+        [DataMember]
+        public bool SortTestMethods { get; set; }
 
 #if SILVERLIGHT
         private static ClientTestRunConfiguration _currentClientTestRunConfiguration;
@@ -136,6 +144,8 @@ namespace StatLight.Core.Configuration
                 return _instanceNumber.Value;
             }
         }
+
+
 
         private static bool ShouldItBeRunInThisInstance(string methodName)
         {
