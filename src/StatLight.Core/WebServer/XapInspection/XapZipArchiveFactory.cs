@@ -65,9 +65,10 @@ namespace StatLight.Core.WebServer.XapInspection
             _zipFile = new ZipFile();
         }
 
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2000:DisposeObjectsBeforeLosingScope")]
         public XapZipArchive(byte[] value)
         {
-            _zipFile = ZipFile.Read(value);
+            _zipFile = ZipFile.Read(new MemoryStream(value));
         }
 
         protected virtual void Dispose(bool disposing)
